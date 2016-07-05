@@ -1,0 +1,39 @@
+{
+  "name": "panto-file-utils",
+  "version": "0.1.0",
+  "description": "File utils for panto",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "eslint index.js && mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pantojs/panto-file-utils.git"
+  },
+  "keywords": [
+    "panto",
+    "file",
+    "utils"
+  ],
+  "author": "Yanni Nightingale <yanni4night@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/pantojs/panto-file-utils/issues"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "dependencies": {
+    "binary-extensions": "^1.5.0",
+    "define-frozen-property": "^0.1.0",
+    "minimatch": "^3.0.2",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.3"
+  },
+  "devDependencies": {
+    "panto-options": "^0.1.0"
+  }
+}
