@@ -18,10 +18,12 @@ const PantoOptions = require('panto-options');
 const FileUtils = require('../');
 
 const fu = new FileUtils(new PantoOptions({
-    cwd: __dirname + '/fixtures/'
+    cwd: __dirname,
+    src: 'fixtures',
+    output: 'output'
 }));
 
-rimraf.sync(__dirname + '/fixtures/output', {
+rimraf.sync(__dirname + '/output', {
     force: true
 });
 
@@ -46,8 +48,8 @@ describe('FileUtils', function () {
     describe('#safeDirp', function () {
         it('should mkdir "output"', function (done) {
             fu.safeDirp('output/a.js').then(() => {
-                assert.ok(fs.existsSync(__dirname + '/fixtures/output'));
-                assert.ok(fs.statSync(__dirname + '/fixtures/output').isDirectory());
+                assert.ok(fs.existsSync(__dirname + '/output/output'));
+                assert.ok(fs.statSync(__dirname + '/output/output').isDirectory());
             }).then(() => {
                 done();
             });
@@ -65,9 +67,9 @@ describe('FileUtils', function () {
     describe('#write', function () {
         it('should write file', function (done) {
             fu.write('a.js', '##').then(() => {
-                assert.ok(fs.existsSync(__dirname + '/fixtures/output/a.js'));
+                assert.ok(fs.existsSync(__dirname + '/output/a.js'));
             }).then(() => {
-                return fu.read('output/a.js')
+                return fu.read('../output/a.js')
             }).then(content => {
                 assert.deepEqual(content, '##');
             }).then(() => {
@@ -83,14 +85,14 @@ describe('FileUtils', function () {
     describe('#rimraf', function () {
         it('should remove file', function (done) {
             fu.rimraf('a.js').then(() => {
-                assert.ok(!fs.existsSync(__dirname + '/fixtures/output/a.js'));
+                assert.ok(!fs.existsSync(__dirname + '/output/a.js'));
             }).then(() => {
                 done();
             });
         });
         it('should remove directory', function (done) {
             fu.rimraf('.').then(() => {
-                assert.ok(!fs.existsSync(__dirname + '/fixtures/output'));
+                assert.ok(!fs.existsSync(__dirname + '/output'));
             }).then(() => {
                 done();
             });

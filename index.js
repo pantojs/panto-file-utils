@@ -28,11 +28,17 @@ class FileUtils {
         return this._options.get('binary_resource', '').toLowerCase().split(',').indexOf(ext) > -1 ||
             binaryExtensions.indexOf(ext) > -1;
     }
+    /**
+     * Find a file under SRC.
+     * 
+     * @param  {string} name
+     * @return {string}
+     */
     locate(name) {
-        return path.join(this._options.get('cwd', process.cwd()), name);
+        return path.join(this._options.get('cwd', process.cwd()), this._options.get('src'), name);
     }
     safeDirp(name) {
-        const fpath = this.locate(name);
+        const fpath = path.join(this._options.get('cwd', process.cwd()), this._options.get('output'), name);
         const dir = path.dirname(fpath);
         return new Promise(resolve => {
             fs.exists(dir, exist => {
@@ -68,7 +74,7 @@ class FileUtils {
         });
     }
     write(name, content) {
-        return this.safeDirp(path.join(this._options.get('output', 'output'), name)).then(fpath => {
+        return this.safeDirp(name).then(fpath => {
             return new Promise((resolve, reject) => {
                 fs.writeFile(fpath, content, err => {
                     if (err) {
@@ -85,7 +91,7 @@ class FileUtils {
     }
     rimraf(filepath, opts = {}) {
         return new Promise((resolve, reject) => {
-            rimraf(path.join(this.locate(this._options.get('output', 'output')), filepath), opts, err => {
+            rimraf(path.join(this._options.get('cwd', process.cwd()), this._options.get('output'), filepath), opts, err => {
                 if (err) {
                     reject(err);
                 } else {

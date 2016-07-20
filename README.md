@@ -3,13 +3,34 @@
 
 File utils for panto.
 
+You can _locate_/_read_ file(s) ONLY in src directory, but _mkdir_/_write_/_remove_ ONLY in output directory.
+
 ```js
 const PantoOptions = require('panto-options');
 const FileUtils = require('panto-file-utils');
 
-const fu = new FileUtils(new PantoOptions({cwd:'.', output:'out'}));
+const fu = new FileUtils(new PantoOptions({cwd: '.', src: 'src', output: 'out'}));
 
-fu.read('a.js').then(...)
+fu.isBinary('foo/bar/a.png')// true
+fu.isBinary('a.js')// false
+
+// locate only in SRC
+fu.locate('foo/a.js').then(...)// ./src/foo/a.js
+
+// read from only SRC
+fu.read('foo/a.js').then(...)// ./src/foo/a.js
+
+// write to only OUTPUT
+fu.write('foo/b.js', 'hello').then(...) // ./out/foo/b.js
+
+// remove from only OUTPUT
+fu.rimraf('foo/b.js', 'hello').then(...) // ./out/foo/b.js
+
+// mkdir only in OUTPUT
+fu.safeDirp('bar')// ./out/bar/
+
+// Alias for minimatch
+fu.match(...)
 ```
 
 ## apis
@@ -18,8 +39,8 @@ fu.read('a.js').then(...)
  - safeDirp(filename): Promise, make sure file's directories exist
  - read(filename): Promise, read a file under cwd
  - write(filename, content): Promise, write a file under cwd/output
- - match(filename, pattern): Promise, alias as minimatch
- - rimraf(filename, options): Promise, remove a file or directory under output
+ - match(filename, pattern): Promise, alias as [minimatch](https://www.npmjs.com/package/minimatch)
+ - rimraf(filename, options): Promise, remove a file or directory under output, alias for [rimraf](https://www.npmjs.com/package/rimraf)
 
 [npm-url]: https://npmjs.org/package/panto-file-utils
 [downloads-image]: http://img.shields.io/npm/dm/panto-file-utils.svg
