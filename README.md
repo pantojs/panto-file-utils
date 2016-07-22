@@ -15,7 +15,10 @@ fu.isBinary('foo/bar/a.png')// true
 fu.isBinary('a.js')// false
 
 // locate only in SRC
-fu.locate('foo/a.js').then(...)// ./src/foo/a.js
+fu.locate('foo/a.js')// ./src/foo/a.js
+
+// touch only in OUTPUT
+fu.touch('foo/a.js')// ./out/foo/a.js
 
 // read from only SRC
 fu.read('foo/a.js').then(...)// ./src/foo/a.js
@@ -23,11 +26,13 @@ fu.read('foo/a.js').then(...)// ./src/foo/a.js
 // write to only OUTPUT
 fu.write('foo/b.js', 'hello').then(...) // ./out/foo/b.js
 
-// remove from only OUTPUT
+// remove from only OUTPUT,alias unlink/remove
 fu.rimraf('foo/b.js', 'hello').then(...) // ./out/foo/b.js
 
 // mkdir only in OUTPUT
-fu.safeDirp('bar')// ./out/bar/
+fu.safeDirp('bar').then(...)// ./out/bar/
+
+fu.copy('foo', 'bar').then(...)// ./out/bar/
 
 // Alias for minimatch
 fu.match(...)

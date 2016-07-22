@@ -1,17 +1,17 @@
 /**
- * Copyright (C) 2016 yanni4night.com
+ * Copyright (C) 2016 pantojs.xyz
  * test.js
  *
  * changelog
  * 2016-07-05[13:41:49]:revised
  *
  * @author yanni4night@gmail.com
- * @version 0.1.0
+ * @version 0.2.1
  * @since 0.1.0
  */
 'use strict';
 const assert = require('assert');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const rimraf = require('rimraf');
 const PantoOptions = require('panto-options');
@@ -41,8 +41,13 @@ describe('FileUtils', function () {
         });
     });
     describe('#locate', function () {
-        it('should get file under "cwd"', function () {
+        it('should get file under "cwd/src"', function () {
             assert.deepEqual(fu.locate('a.js'), __dirname + '/fixtures/a.js');
+        });
+    });
+    describe('#touch', function () {
+        it('should get file under "cwd/output"', function () {
+            assert.deepEqual(fu.touch('a.js'), __dirname + '/output/a.js');
         });
     });
     describe('#safeDirp', function () {
@@ -82,7 +87,7 @@ describe('FileUtils', function () {
             assert.ok(fu.match('a.js', '*.js'));
         });
     });
-    describe('#rimraf', function () {
+    describe('#rimraf#remove#unlink', function () {
         it('should remove file', function (done) {
             fu.rimraf('a.js').then(() => {
                 assert.ok(!fs.existsSync(__dirname + '/output/a.js'));
@@ -96,6 +101,13 @@ describe('FileUtils', function () {
             }).then(() => {
                 done();
             });
+        });
+    });
+    describe('#copy', () => {
+        it('should copy', done => {
+            fu.copy('a.js', 'b.js').then(() => {
+                assert.ok(fs.existsSync(__dirname + '/output/b.js'));
+            }).then(() => done());
         });
     });
 });

@@ -1,6 +1,6 @@
 {
   "name": "panto-file-utils",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "File utils for panto",
   "main": "index.js",
   "directories": {
@@ -29,9 +29,9 @@
   "dependencies": {
     "binary-extensions": "^1.5.0",
     "define-frozen-property": "^0.1.0",
+    "fs-extra": "^0.30.0",
     "minimatch": "^3.0.2",
-    "mkdirp": "^0.5.1",
-    "rimraf": "^2.5.3"
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
     "panto-options": "^0.1.0"
