@@ -1,5 +1,5 @@
 # panto-file-utils
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 File utils for panto.
 
@@ -40,12 +40,16 @@ fu.match(...)
 
 ## apis
  - isBinary(filename): Boolean, if it's a binary file type.
- - locate(filename): Promise, return a file path under cwd.
- - safeDirp(filename): Promise, make sure file's directories exist
- - read(filename): Promise, read a file under cwd
- - write(filename, content): Promise, write a file under cwd/output
- - match(filename, pattern): Promise, alias as [minimatch](https://www.npmjs.com/package/minimatch)
- - rimraf(filename, options): Promise, remove a file or directory under output, alias for [rimraf](https://www.npmjs.com/package/rimraf)
+ - locate(filename): Promise, return a file path under ${cwd}/${src}.
+ - touch(filename): Promise, return a file path under ${cwd}/${output}.
+ - safeDirp(filename): Promise, make sure file's directories exist.
+ - read(filename): Promise, read a file under ${cwd}/${src}.
+ - write(filename, content): Promise, write a file under ${cwd}/${output}.
+ - match(filename, pattern): Promise, alias as [minimatch](https://www.npmjs.com/package/minimatch).
+ - remove(filename): Promise, remove a file or directory under ${cwd}/${output}.
+ - unlink: Alias for remove.
+ - rimraf: Alias for remove.
+ - copy: Promise, copy from ${cwd}/${src} to ${cwd}/${output}.
 
 [npm-url]: https://npmjs.org/package/panto-file-utils
 [downloads-image]: http://img.shields.io/npm/dm/panto-file-utils.svg
@@ -56,3 +60,5 @@ fu.match(...)
 [david-dm-image]:https://david-dm.org/pantojs/panto-file-utils.svg
 [david-dm-dev-url]:https://david-dm.org/pantojs/panto-file-utils#info=devDependencies
 [david-dm-dev-image]:https://david-dm.org/pantojs/panto-file-utils/dev-status.svg
+[coveralls-image]:https://coveralls.io/repos/github/pantojs/panto-file-utils/badge.svg?branch=master
+[coveralls-url]:https://coveralls.io/github/pantojs/panto-file-utils?branch=master
