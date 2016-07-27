@@ -6,7 +6,7 @@
  * 2016-07-05[13:41:49]:revised
  *
  * @author yanni4night@gmail.com
- * @version 0.2.1
+ * @version 0.3.0
  * @since 0.1.0
  */
 'use strict';
@@ -85,6 +85,9 @@ describe('FileUtils', function () {
     describe('#match', function () {
         it('should match', function () {
             assert.ok(fu.match('a.js', '*.js'));
+        });
+        it('should multimatch', function () {
+            assert.ok(fu.match('a.js', ['*.js']));
         });
     });
     describe('#rimraf#remove#unlink', function () {

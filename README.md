@@ -34,7 +34,7 @@ fu.safeDirp('bar').then(...)// ./out/bar/
 
 fu.copy('foo', 'bar').then(...)// ./out/bar/
 
-// Alias for minimatch
+// Alias for multimatch
 fu.match(...)
 ```
 
@@ -45,7 +45,7 @@ fu.match(...)
  - safeDirp(filename): Promise, make sure file's directories exist.
  - read(filename): Promise, read a file under ${cwd}/${src}.
  - write(filename, content): Promise, write a file under ${cwd}/${output}.
- - match(filename, pattern): Promise, alias as [minimatch](https://www.npmjs.com/package/minimatch).
+ - match(filename, pattern): Promise, alias as [multimatch](https://www.npmjs.com/package/multimatch).
  - remove(filename): Promise, remove a file or directory under ${cwd}/${output}.
  - unlink: Alias for remove.
  - rimraf: Alias for remove.

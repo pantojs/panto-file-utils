@@ -5,9 +5,10 @@
  * changelog
  * 2016-07-05[13:39:10]:revised
  * 2016-07-22[18:21:45]:add #touch #remove #unlink #copy
+ * 2016-07-27[19:51:37]:multimatch instead of minimatch
  *
  * @author yanni4night@gmail.com
- * @version 0.2.1
+ * @version 0.3.0
  * @since 0.1.0
  */
 'use strict';
@@ -16,7 +17,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const minimatch = require('minimatch');
+const multimatch = require('multimatch');
 const binaryExtensions = require('binary-extensions');
 const defineFrozenProperty = require('define-frozen-property');
 
@@ -116,13 +117,13 @@ class FileUtils {
         });
     }
     /**
-     * Alias for minimatch.
+     * Alias for multimatch.
      * 
      * @param  {...string} args
      * @return {Boolean}
      */
     match(...args) {
-        return minimatch(...args);
+        return multimatch(...args);
     }
     /**
      * Remove a file under ${cwd}/${output}.
