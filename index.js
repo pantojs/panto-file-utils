@@ -8,12 +8,11 @@
  * 2016-07-27[19:51:37]:multimatch instead of minimatch
  *
  * @author yanni4night@gmail.com
- * @version 0.3.0
+ * @version 0.3.1
  * @since 0.1.0
  */
 'use strict';
 
-//const fs = require('fs');
 const fs = require('fs-extra');
 const path = require('path');
 const mkdirp = require('mkdirp');
@@ -25,6 +24,12 @@ class FileUtils {
     constructor(opt) {
         defineFrozenProperty(this, '_options', opt);
     }
+    /**
+     * If a file path is binary type.
+     * 
+     * @param  {string}  filepath
+     * @return {Boolean}
+     */
     isBinary(filepath) {
         const ext = path.extname(filepath).slice(1).toLowerCase();
         return this._options.get('binary_resource', '').toLowerCase().split(',').indexOf(ext) > -1 ||
